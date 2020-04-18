@@ -1,0 +1,54 @@
+<div class="container-voyage text-align: center">
+    <div class="voyage text-align: center">
+        <div class="container-stop" *ngFor="let v of journeyList; let i = index" [attr.data-index]="i">
+
+            <div class="stop textcenter">
+                <div>
+                    {{ v.from.name }}
+                </div>
+                <i class="material-icons" style="margin: auto;">
+                arrow_right_alt
+                </i>
+                <div>
+                    {{ v.to.name }}
+                </div>
+            </div>
+
+            <div class="stop textcenter">
+                <div>
+                    <div>{{ v.departDate.date }}</div>
+                    <div style="align-items: center;justify-content: center;width: auto;">
+                        <i class="material-icons">
+                access_time
+              </i>{{ v.departDate.time }}
+                    </div>
+                </div>
+                <i class="material-icons" style="margin: auto;">
+                    arrow_right_alt
+                    </i>
+                <div>
+                    <div style="align-items: center;justify-content: center;width: auto;">
+                        <i class="material-icons">
+                access_time
+              </i>{{ v.arrivalDate.time }}
+                    </div>
+                    <div>{{ v.arrivalDate.date }}</div>
+                </div>
+
+            </div>
+            <div style="justify-content: center">
+                <i class="material-icons">
+            hourglass_empty
+          </i>
+                <div>
+                    Durée : {{ v.duree }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-save textcenter">
+        <div class="textcenter btn_2 d-none d-lg-inline-block">
+            Durée totale : {{ DureeTotale }}
+        </div>
+    </div>
+</div>

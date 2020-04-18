@@ -1,0 +1,111 @@
+<header class="main_menu home_menu">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg navbar-light">
+
+                    <a class="btn_1 d-none d-lg-block" href="https://github.com/users/AnasSplit/projects/1">Lien GitHub</a>
+
+                    <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a routerLink="" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/about" class="nav-link">about</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" routerLink="" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    pages
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                                    <a class="dropdown-item" href="https://data.sncf.com/explore/?sort=modified">API SNCF</a>
+                                    <a class="dropdown-item" href="https://www.navitia.io/">navitia.io</a>
+                                    <a class="dropdown-item" href="http://doc.navitia.io/">Documentation</a>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <a class="btn_1 d-none d-lg-block" href="https://fr.linkedin.com/in/anas-simri-409645124">Anas SIMRI</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>TrouveTonTrain</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br>
+<br>
+
+<div class="sticky-div">
+    <form [formGroup]="formGroup" autocomplete="off" (ngSubmit)="onSubmit()">
+        <div class="form-group row contain">
+
+            <div class="searchbar text-center d-flex justify-content-center h-100">
+                <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                <input placeholder="Départ" class="search_input" type="text" name="" (input)="getOptions($event.target.value, 1)" matInput formControlName="from" [matAutocomplete]="from">
+                <mat-autocomplete #from="matAutocomplete">
+                    <mat-option *ngFor="let option of optionsFrom" [value]="option">{{option}}</mat-option>
+                </mat-autocomplete>
+            </div>
+
+            <div class="searchbar text-center d-flex justify-content-center h-100">
+                <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                <input placeholder="Arrivée" class="search_input" type="text" name="" (input)="getOptions($event.target.value, 2)" matInput formControlName="to" [matAutocomplete]="to">
+                <mat-autocomplete #to="matAutocomplete">
+                    <mat-option *ngFor="let option of optionsTo" [value]="option">{{option}}</mat-option>
+                </mat-autocomplete>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Date</mat-label>
+                    <input matInput formControlName="dateTime" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+
+                <ngb-timepicker formControlName="time" name="time"></ngb-timepicker>
+            </div>
+            <button style="height: 50px;" class="btn btn-primary" type="submit" [disabled]="formGroup.invalid">Voyager</button>
+        </div>
+    </form>
+
+    <br>
+
+    <div class="sticky-div">
+        <div *ngIf="fromP" class="resume-container">
+            <div>Voici les itinéraires pour un trajet entre {{ fromP.name }} et {{ toP.name }}, le {{ choixDateSelectionnee }}</div>
+
+            <div class="btn_2 d-none d-lg-block">Distance : {{ distance }} kilomètres</div>
+            <div class="btn_2 d-none d-lg-block">Prix estimé : {{ prixTrajet }}{{selectedView}}</div>
+            <mat-form-field style="height: 60px;" *ngIf="prixTrajet">
+                <mat-label>Devise</mat-label>
+                <mat-select [(value)]="selected">
+                    <mat-option *ngFor="let devise of devises" [value]="devise.value">
+                        {{ devise.viewValue }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <app-voyage *ngFor="let voyage of dataJourney" [voyage]="voyage" [distance]="distance" [choixDate]="choixDate"></app-voyage>
+</div>

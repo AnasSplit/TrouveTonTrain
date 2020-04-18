@@ -1,0 +1,21 @@
+.form-inline {
+    width: 100%;
+}
+
+.contain {
+    align-items: center;
+    justify-content: space-evenly;
+    width: 70%;
+    margin: auto;
+}
+
+.resume-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+    padding: 5px 0;
+    font-size: 20px;
+}
